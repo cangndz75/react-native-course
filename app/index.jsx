@@ -1,7 +1,9 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Colors from "../constant/Colors";
-const index = () => {
+import { useRouter } from "expo-router";
+export default function index() {
+  const router = useRouter();
   return (
     <View style={{ flex: 1, backgroundColor: Colors.WHITE }}>
       <Image
@@ -12,7 +14,7 @@ const index = () => {
         style={{
           padding: 25,
           backgroundColor: Colors.PRIMARY,
-          height: "100%",
+          flex: 1,
           borderTopLeftRadius: 25,
           borderTopRightRadius: 25,
         }}
@@ -38,14 +40,17 @@ const index = () => {
           Discover a variety of courses to enhance your skills and knowledge.
         </Text>
 
-        <View style={{ marginTop: 100,width:'auto' }}>
-          <View style={styles.button}>
+        <View style={{ marginTop: 100, width: "auto" }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.push("/auth/signIn")}
+          >
             <Text style={[styles.buttonText, { color: Colors.PRIMARY }]}>
               Get started
             </Text>
-          </View>
+          </TouchableOpacity>
 
-          <View
+          <TouchableOpacity
             style={[
               styles.button,
               {
@@ -54,16 +59,15 @@ const index = () => {
                 borderColor: Colors.WHITE,
               },
             ]}
+            onPress={() => router.push("/auth/signUp")}
           >
             <Text style={styles.buttonText}>Already have an account</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-};
-
-export default index;
+}
 
 const styles = StyleSheet.create({
   button: {
